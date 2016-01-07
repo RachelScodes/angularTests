@@ -5,14 +5,21 @@
       <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
       <title>Store Angular Test App</title>
    </head>
-   <body>
-
+   <body ng-controller="StoreController as store">
       <!-- store controller is name of controller in app.js -->
       <!-- "as store" assigns it to a dom variable as a shortcut -->
-      <div ng-controller="StoreController as store">
-         <h1> {{ store.product.name }} </h1>
-         <h2> ${{ store.product.price }} </h2>
-         <p> {{ store.product.desc }} </p>
+
+      <div ng-repeat="product in store.products">
+         <!-- <div ng-show="!store.product.soldOut"> -->
+         <div ng-hide="product.soldOut" >
+            <h3>
+               {{ product.name }}
+               <!-- {{ data | filter:options}} -->
+               <em class="pull-right"> {{ product.price | currency }} </em>
+            </h3>
+            <p> {{ product.desc }} </p>
+            <button ng-show="product.canPurchase"> Add to Cart </button>
+         </div>
       </div>
 
       <script type="text/javascript" src="js/angular.js"></script>
